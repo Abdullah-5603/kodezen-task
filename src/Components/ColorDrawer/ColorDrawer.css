@@ -1,0 +1,22 @@
+.kzui__color_drawer{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 5px;
+    border-radius: 5px;
+    color: black;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    z-index: 50;
+}
+/* .kzui__color_drawer p{
+    background-color: white;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    padding: 5px;
+    border-radius: 5px;
+} */
