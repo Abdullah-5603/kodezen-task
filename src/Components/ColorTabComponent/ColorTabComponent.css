@@ -1,0 +1,126 @@
+/* .kzui-color-tab-component {
+    
+  &_kzui-color-item {
+      
+    }
+    &_kzui-menu {
+      
+    }
+    &_kzui-drawer {
+      
+    }
+  }
+   */
+.kzui__app {
+  /* width: 100%;
+  height: 100%; */
+  /* background-color: #13191B; */
+  padding: 10px 40px;
+  border: 2px solid gray;
+  border-radius: 10px;
+
+}
+
+.kzui__header {
+  color: #2D2C33;
+  font-size: 30px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid gray;
+}
+
+.kzui__tabs__Section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kzui__tabs {
+  color: #2D2C33;
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kzui__tabs h3 {
+  color: #74777C;
+  border-bottom: 2px solid gray;
+  padding-bottom: 3px;
+  cursor: pointer;
+}
+
+.kzui__tabs h3:hover {
+  color: #2D2C33;
+}
+
+.kzui__color__div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid gray;
+  padding-bottom: 4px;
+}
+
+.kzui__color__item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid gray;
+  padding-bottom: 4px;
+}
+
+.kzui__color__item:hover{
+  background-color: #F4F4F5;
+  border-radius: 10px;
+}
+
+.kzui__color {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+
+.kzui__color__name {
+  display: flex;
+  align-items: center;
+  
+}
+
+.kzui__color__name input {
+  display: none;
+}
+
+.kzui__color__item:hover .kzui__color__name input {
+  display: block;
+}
+.kzui__color__item:hover .kzui__color__name img {
+  display: none;
+}
+
+.kzui__color__name img {
+  width: 16px;
+  margin-right: 5px;
+}
+
+.kzui__add__button {
+  margin: 15px 0;
+  padding: 10px 15px;
+  border: none;
+  background-color: #ffff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.kzui__add__button img {
+  width: 16px;
+  margin-right: 5px;
+  color: #74777C;
+  /* background-color: #74777C; */
+}
