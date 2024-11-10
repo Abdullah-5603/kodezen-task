@@ -16,6 +16,11 @@ const ColorTabComponent = () => {
     const [isDrawerOpen, setDrawerOpen] = useState(false);
     const [editingItem, setEditingItem] = useState({});
     const [hexColor, setHexColor] = useState('');
+    const [activeTab, setActiveTab] = useState('Color');
+
+    const handleTabClick = (tabName) => {
+        setActiveTab(tabName);
+    };
 
     // Handle hex color change
     const handleHexChange = (e) => {
@@ -74,22 +79,7 @@ const ColorTabComponent = () => {
     // Delete Item
     const handleDelete = (id) => {
         setColors(colors.filter((item) => item.id !== id));
-    };
-
-    // Add Item
-    const handleAdd = () => {
-        const newItem = { id: colors.length + 1, title: 'New Color', color: '#FFFFFF' };
-        setColors([...colors, newItem]);
-        setEditingItem(newItem);
-        setDrawerOpen(true);
-    };
-
-    // Save Edit
-    const handleSave = (updatedItem) => {
-        setColors(colors.map((item) => (item.id === updatedItem.id ? updatedItem : item)));
-        setDrawerOpen(false);
-        setEditingItem(null);
-    };
+    };;
 
     const handleDotClick = (id) => {
         setOpenDrawerId(openDrawerId === id ? null : id); // Toggle open/close
@@ -98,19 +88,34 @@ const ColorTabComponent = () => {
 
 
     return (
-        <div className="kzui__app">
-            <h2 className='kzui__header'>Design System</h2>
+        <div className="kzui-app">
+            <h2 className='kzui-header'>Design System</h2>
 
-            <div className='kzui__tabs__Section'>
-                <div className='kzui__tabs'>
-                    <h3 id='kzui__color'>Color</h3>
-                    <h3>Typography</h3>
-                    <h3>Shadow</h3>
+            <div className='kzui-tabs-Section'>
+                <div className='kzui-tabs'>
+                    <h3
+                        className={`kzui-tabs__title ${activeTab === 'Color' ? 'kzui-tabs__title--active' : ''}`}
+                        onClick={() => handleTabClick('Color')}
+                    >
+                        Color
+                    </h3>
+                    <h3
+                        className={`kzui-tabs__title ${activeTab === 'Typography' ? 'kzui-tabs__title--active' : ''}`}
+                        onClick={() => handleTabClick('Typography')}
+                    >
+                        Typography
+                    </h3>
+                    <h3
+                        className={`kzui-tabs__title ${activeTab === 'Shadow' ? 'kzui-tabs__title--active' : ''}`}
+                        onClick={() => handleTabClick('Shadow')}
+                    >
+                        Shadow
+                    </h3>
                 </div>
                 <input type="text" placeholder='search' />
             </div>
 
-            <div className='kzui__color__div' style={{ width: '70%' }}>
+            <div className='kzui-color-div' style={{ width: '70%' }}>
                 <h3>Name</h3>
                 <h3>Value</h3>
             </div>
@@ -118,13 +123,21 @@ const ColorTabComponent = () => {
             <div style={{ width: '70%' }}>
                 {
                     colors.map(color => (
-                        <div key={color.id} className='kzui__color__item'>
-                            <div className='kzui__color__name'>
+                        <div
+                            key={color.id}
+                            className={`kzui-color-item`}
+                        >
+                            <div className='kzui-color-name'>
                                 <img src={colorPalleteIcons} alt="" />
-                                <input type="checkbox" name="select" id="" />
+                                <input
+                                    type="checkbox"
+                                    name="select"
+                                    id=""
+                                    className='kzui-color-item__name-input'
+                                />
                                 {color.title}
                             </div>
-                            <div className='kzui__color'>
+                            <div className='kzui-color'>
                                 <div
                                     style={{
                                         width: '30px',
@@ -140,15 +153,15 @@ const ColorTabComponent = () => {
                                 </div>
                             </div>
 
-                            <button onClick={() => handleDotClick(color.id)} className='kzui__dots'>
+                            <button onClick={() => handleDotClick(color.id)} className='kzui-dots'>
                                 ...
                             </button>
 
                             {openDrawerId === color.id && (
-                                <div className='kzui__action__drawer'>
-                                    <button onClick={() => handleEdit(color)}>Edit</button>
-                                    <button onClick={()=> handleDuplicate(color)}>Duplicate</button>
-                                    <button onClick={() => handleDelete(color.id)}>Delete</button>
+                                <div className='kzui-action-drawer'>
+                                    <button onClick={() => handleEdit(color)} className='kzui-action-drawer__button'>Edit</button>
+                                    <button onClick={() => handleDuplicate(color)} className='kzui-action-drawer__button'>Duplicate</button>
+                                    <button onClick={() => handleDelete(color.id)} className='kzui-action-drawer__button'>Delete</button>
                                 </div>
                             )}
 
@@ -157,35 +170,42 @@ const ColorTabComponent = () => {
                 }
             </div>
 
-            <button onClick={() => {
-                setDrawerOpen(true);
-                setEditingItem({ id: colors.length + 1, title: 'New Color', color: '#FFFFFF' });
-                setHexColor('#FFFFFF');  // Set default hex color
-            }} className='kzui__add__button'>
-                <img src={plusIcons} alt="" />
+            <button
+                onClick={() => {
+                    setDrawerOpen(true);
+                    setEditingItem({ id: colors.length + 1, title: 'New Color', color: '#FFFFFF' });
+                    setHexColor('#FFFFFF');  // Set default hex color
+                }}
+                className='kzui-add-button'
+            >
+                <img src={plusIcons} alt="" className='kzui-add-button__icon' />
                 Add Color
             </button>
 
+
             {isDrawerOpen && (
-                <form onSubmit={handleSaveChange} className="kzui__edit__color">
-                    <div className="kzui__edit__color__name">
-                        <div>
+                <form onSubmit={handleSaveChange} className="kzui-edit-color">
+                    <div className="kzui-edit-color__name">
+                        <div className="kzui-edit-color__header">
                             <label htmlFor="edit_color_name">Name</label>
-                            <button onClick={() => setDrawerOpen(false)}>X</button>
+                            <button onClick={() => {
+                                setDrawerOpen(false)
+                                setOpenDrawerId('')
+                            }}>X</button>
                         </div>
                         <input
                             type="text"
                             name="edit_color_name"
-                            defaultValue={editingItem.title}  // Bind the input to state
+                            defaultValue={editingItem.title}
                             onChange={(e) => setEditingItem({ ...editingItem, title: e.target.value })}
                             required
                         />
                     </div>
 
                     <h4>Value</h4>
-                    <div className="kzui__edit__color__value">
+                    <div className="kzui-edit-color__value">
                         <p>{editingItem.title}</p>
-                        <div className="kzui__color">
+                        <div className="kzui-color">
                             <div
                                 style={{
                                     width: "30px",
@@ -202,31 +222,32 @@ const ColorTabComponent = () => {
                         </div>
                     </div>
 
-                    <div className="kzui__color__picker__container">
-                        <div className="kzui__color__input">
+                    <div className="kzui-color-picker">
+                        <div className="kzui-color-picker__input">
                             <div
-                                className="kzui__color__display"
+                                className="kzui-color-picker__display"
                                 style={{ backgroundColor: hexColor }}
                             ></div>
                             <input
                                 type="text"
-                                defaultValue={hexColor}  // Bind the hexColor state to the input
+                                defaultValue={hexColor}
                                 onChange={handleHexChange}
                                 maxLength={7}
                             />
                         </div>
 
-                        <div className="kzui__actions">
-                            <button type="button" className="kzui__cancel__btn" onClick={() => setDrawerOpen(false)}>
+                        <div className="kzui-actions">
+                            <button type="button" className="kzui-actions__cancel-btn" onClick={() => setDrawerOpen(false)}>
                                 Cancel
                             </button>
-                            <button type="submit" className="kzui__save__btn">
+                            <button type="submit" className="kzui-actions__save-btn">
                                 Save Changes
                             </button>
                         </div>
                     </div>
                 </form>
             )}
+
         </div>
 
     );
