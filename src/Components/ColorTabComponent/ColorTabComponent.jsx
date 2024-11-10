@@ -12,9 +12,7 @@ const initialColors = [
 
 const ColorTabComponent = () => {
     const [colors, setColors] = useState(initialColors);
-    const [isColorDrawer, setIsColorDrawer] = useState(false)
     const [openDrawerId, setOpenDrawerId] = useState('');
-    const [menuOpen, setMenuOpen] = useState(null);
     const [isDrawerOpen, setDrawerOpen] = useState(false);
     const [editingItem, setEditingItem] = useState({});
     const [hexColor, setHexColor] = useState('');
@@ -25,12 +23,6 @@ const ColorTabComponent = () => {
         if (value.match(/^#([0-9A-F]{3}){1,2}$/i) || value === '') {
             setHexColor(value);
         }
-    };
-
-
-    // Handle Drag Start
-    const handleDragStart = (e, index) => {
-        e.dataTransfer.setData('dragIndex', index);
     };
 
     const handleSaveChange = (e) => {
@@ -63,22 +55,12 @@ const ColorTabComponent = () => {
         }
     };
 
-
-    // Handle Drop
-    const handleDrop = (e, dropIndex) => {
-        const dragIndex = e.dataTransfer.getData('dragIndex');
-        const updatedColors = [...colors];
-        const [draggedItem] = updatedColors.splice(dragIndex, 1);
-        updatedColors.splice(dropIndex, 0, draggedItem);
-        setColors(updatedColors);
-    };
-
     // Edit Item
     const handleEdit = (item) => {
         setEditingItem(item);
         setDrawerOpen(true);
         setOpenDrawerId(item.id);
-        setIsColorDrawer(false)
+        // setIsColorDrawer(false)
         setHexColor(item.color)
     };
 
@@ -86,6 +68,7 @@ const ColorTabComponent = () => {
     const handleDuplicate = (item) => {
         const newItem = { ...item, id: colors.length + 1, title: `${item.title} Copy` };
         setColors([...colors, newItem]);
+        setOpenDrawerId('')
     };
 
     // Delete Item
@@ -120,7 +103,7 @@ const ColorTabComponent = () => {
 
             <div className='kzui__tabs__Section'>
                 <div className='kzui__tabs'>
-                    <h3>Color</h3>
+                    <h3 id='kzui__color'>Color</h3>
                     <h3>Typography</h3>
                     <h3>Shadow</h3>
                 </div>
@@ -164,7 +147,7 @@ const ColorTabComponent = () => {
                             {openDrawerId === color.id && (
                                 <div className='kzui__action__drawer'>
                                     <button onClick={() => handleEdit(color)}>Edit</button>
-                                    <button>Duplicate</button>
+                                    <button onClick={()=> handleDuplicate(color)}>Duplicate</button>
                                     <button onClick={() => handleDelete(color.id)}>Delete</button>
                                 </div>
                             )}

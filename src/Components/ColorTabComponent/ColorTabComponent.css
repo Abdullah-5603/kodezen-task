@@ -180,6 +180,10 @@
   position: relative;
 }
 
+/* .kzui__color{
+  color: #2D2C33;
+} */
+
 .kzui__header {
   color: #2D2C33;
   font-size: 30px;
@@ -207,6 +211,11 @@
   border-bottom: 2px solid gray;
   padding-bottom: 3px;
   cursor: pointer;
+}
+
+#kzui__color {
+  color: #2D2C33;
+  border-bottom: 2px solid #2D2C33;
 }
 
 .kzui__tabs h3:hover {
@@ -365,7 +374,7 @@
   border-bottom: 2px solid gray;
 }
 
-.kzui__edit__color__name div{
+.kzui__edit__color__name div {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -373,19 +382,19 @@
   align-items: center;
 }
 
-.kzui__edit__color__name label{
+.kzui__edit__color__name label {
   margin: 10px;
   font-size: 20px;
   font-weight: bold;
 }
 
-.kzui__edit__color__name INPUT{
+.kzui__edit__color__name INPUT {
   margin: 10px;
   padding: 4px;
   border-radius: 5px;
 }
 
-.kzui__edit__color__value{
+.kzui__edit__color__value {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -396,8 +405,8 @@
 .kzui__color__picker__container {
   /* background: #ffffff;
    */
-   width: 100%;
-   height: 100%;
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
   padding: 20px;
   /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
