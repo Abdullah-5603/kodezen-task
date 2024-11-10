@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './ColorTabComponent.css';
 import colorPalleteIcons from '../../assets/Icons/pallete.png'
 import plusIcons from '../../assets/Icons/plus.png'
+import { generateUniqueId } from '../../utils';
 
 const initialColors = [
     { id: 1, title: 'Primary', color: '#FF0000' },
@@ -50,7 +51,8 @@ const ColorTabComponent = () => {
             setOpenDrawerId('')
         } else {
             const newColor = {
-                id: colors.length + 1,
+                // id: colors.length + 1,
+                id: generateUniqueId(),
                 title: colorTitle,
                 color: hexColor,
             }
@@ -71,7 +73,12 @@ const ColorTabComponent = () => {
 
     // Duplicate Item
     const handleDuplicate = (item) => {
-        const newItem = { ...item, id: colors.length + 1, title: `${item.title} Copy` };
+        const newItem = {
+            ...item,
+            // id: colors.length + 1,
+            id: generateUniqueId(),
+            title: `${item.title} Copy`
+        };
         setColors([...colors, newItem]);
         setOpenDrawerId('')
     };
@@ -140,15 +147,14 @@ const ColorTabComponent = () => {
                             <div className='kzui-color'>
                                 <div
                                     style={{
-                                        width: '30px',
-                                        height: '30px',
+                                        width: '20px',
+                                        height: '20px',
                                         backgroundColor: color.color,
                                         borderRadius: '5px',
                                         marginRight: '10px',
                                     }}
                                 ></div>
                                 <div>
-                                    <p style={{ margin: 0, fontWeight: 'bold' }}>{color.title}</p>
                                     <p style={{ margin: 0 }}>{color.color}</p>
                                 </div>
                             </div>
@@ -208,15 +214,14 @@ const ColorTabComponent = () => {
                         <div className="kzui-color">
                             <div
                                 style={{
-                                    width: "30px",
-                                    height: "30px",
+                                    width: "20px",
+                                    height: "20px",
                                     backgroundColor: hexColor,
                                     borderRadius: "5px",
                                     marginRight: "10px",
                                 }}
                             ></div>
                             <div>
-                                <p style={{ margin: 0, fontWeight: "bold" }}>{editingItem.title}</p>
                                 <p style={{ margin: 0 }}>{hexColor}</p>
                             </div>
                         </div>
@@ -237,7 +242,10 @@ const ColorTabComponent = () => {
                         </div>
 
                         <div className="kzui-actions">
-                            <button type="button" className="kzui-actions__cancel-btn" onClick={() => setDrawerOpen(false)}>
+                            <button type="button" className="kzui-actions__cancel-btn" onClick={() => {
+                                setDrawerOpen(false)
+                                setOpenDrawerId('')
+                            }}>
                                 Cancel
                             </button>
                             <button type="submit" className="kzui-actions__save-btn">
