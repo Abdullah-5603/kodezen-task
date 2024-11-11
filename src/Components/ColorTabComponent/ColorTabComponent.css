@@ -88,13 +88,19 @@
   align-items: center;
 }
 
-.kzui-color-name img {
-  display: flex;
+.kzui-color-palate-icon  {
+  display: block;
   width: 18px;
   margin-right: 4px;
 }
+.kzui-drag-icon{
+  display: flex;
+  width: 18px;
+  margin-right: 4px;
+  cursor: grab;
+}
 
-.kzui-color-item:hover .kzui-color-name img {
+.kzui-color-item:hover .kzui-color-name .kzui-color-palate-icon {
   display: none;
 }
 
